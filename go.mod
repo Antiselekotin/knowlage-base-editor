@@ -1,3 +1,3 @@
-module github.com/Antiselekotin/knowlage-base-editor
+module github.com/krls256/knowlage-base-editor
 
 go 1.16
