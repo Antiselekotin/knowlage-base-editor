@@ -39,6 +39,7 @@ func (cache *FileCache)put(content []byte) error {
 }
 
 func (cache *FileCache)pull() ([]byte, error) {
+	cache.src.Seek(0,0)
 	buf, err := ioutil.ReadAll(cache.src)
 	if err != nil {
 		return nil, err
