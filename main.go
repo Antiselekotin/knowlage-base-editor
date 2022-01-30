@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
-	"fmt"
-	"github.com/krls256/knowlage-base-editor/pkg/github"
 	"github.com/joho/godotenv"
+	"github.com/krls256/knowlage-base-editor/pkg/github"
+	"github.com/krls256/knowlage-base-editor/pkg/zettelkasten"
 	"log"
 	"os"
 )
@@ -26,5 +26,9 @@ func main()  {
 	user := &github.User{Login: ghLogin, AuthToken: ghToken}
 	repo := &github.Repository{Name: ghRepo}
 	err := github.WriteRepoToDisk(ctx, user, repo, "storage/repo")
-	fmt.Println(err)
+	if err != nil {
+		panic("can not get repo")
+	}
+	base := zettelkasten.NewBase()
+	base.ParseFromDisk("storage/repo")
 }
