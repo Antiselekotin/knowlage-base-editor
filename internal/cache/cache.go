@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 )
 
-var cacheFileName = "./.cache/cache"
-var secretCacheFileName = "./.cache/secret-cache"
+var cacheFileName = "storage/.cache/cache"
+var secretCacheFileName = "storage/.cache/secret-cache"
 
 var MainFileCache cache.Cache
 var SecretFileCache cache.Cache
