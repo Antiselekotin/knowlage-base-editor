@@ -133,8 +133,9 @@ func parseArticleFile(dir os.DirEntry, articlePath string) (articleClear, error)
 
 		if strings.HasPrefix(lines[0], "# ") {
 			articleContent.Title = lines[0][2:]
+			iterStat := map[string]bool{}
 			for lineIndex, line := range lines[1:] {
-				iterStat := map[string]bool{}
+
 				if strings.HasPrefix(line, "## ") {
 					if strings.HasPrefix(line[3:], "Теги") {
 						iterStat["isTagSection"], iterStat["isConnectionSection"] = true, false
@@ -167,7 +168,7 @@ func parseArticleFile(dir os.DirEntry, articlePath string) (articleClear, error)
 func cutPathFromLine(line, subString string) (cut string, ok bool) {
 	index := strings.Index(line, subString)
 	if index != -1 {
-		return strings.ReplaceAll(line[index+len(subString):len(line)-1], "/", ""), ok
+		return strings.ReplaceAll(line[index+len(subString):len(line)-1], "/", ""), true
 	}
 	return
 }

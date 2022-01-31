@@ -19,14 +19,14 @@ func NewBase() *base {
 
 func (b *base)AddTag(tag tagClear) {
 	newTag := Tag{Title: tag.Title, FileName: tag.FileName, Articles: make([]*Article, 0)}
-	for _, articleTitle := range tag.ArticlePaths {
-		article, ok := b.articles[articleTitle]
+	for _, articlePath := range tag.ArticlePaths {
+		article, ok := b.articles[articlePath]
 		if ok {
 			newTag.Articles = append(newTag.Articles, article)
 			article.Tags = append(article.Tags, &newTag)
 		}
 	}
-	b.tags[newTag.Title] = &newTag
+	b.tags[newTag.Index()] = &newTag
 }
 
 func (b *base)AddArticle(article articleClear) {
@@ -41,21 +41,21 @@ func (b *base)AddArticle(article articleClear) {
 	}
 	newArticle := Article{Title: article.Title, FileName: fName, Content: article.Content, Number: num,
 		Tags: make([]*Tag, 0), Connections: make([]*Article, 0)}
-		for _, articleTitle := range article.ArticlePaths {
-			article, ok := b.articles[articleTitle]
+		for _, articlePath := range article.ArticlePaths {
+			article, ok := b.articles[articlePath]
 			if ok {
 				newArticle.Connections = append(newArticle.Connections, article)
 				article.Connections = append(article.Connections, &newArticle)
 			}
 		}
-	for _, tagTitle := range article.TagPaths {
-		tag, ok := b.tags[tagTitle]
+	for _, tagPath := range article.TagPaths {
+		tag, ok := b.tags[tagPath]
 		if ok {
 			newArticle.Tags = append(newArticle.Tags, tag)
 			tag.Articles = append(tag.Articles , &newArticle)
 		}
 	}
-	b.articles[newArticle.Title] = &newArticle
+	b.articles[newArticle.Index()] = &newArticle
 }
 
 func (b *base)Tags() []*Tag {

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/krls256/knowlage-base-editor/pkg/github"
 	"github.com/krls256/knowlage-base-editor/pkg/zettelkasten"
@@ -31,4 +32,6 @@ func main()  {
 	}
 	base := zettelkasten.NewBase()
 	base.ParseFromDisk("storage/repo")
+	tag := base.Tags()[0]
+	fmt.Println(tag)
 }

@@ -12,3 +12,7 @@ type articleClear struct {
 	ArticlePaths []string
 	TagPaths     []string
 }
+
+func (a *Article)Index() string {
+	return a.FileName
+}

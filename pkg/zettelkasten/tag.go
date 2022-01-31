@@ -9,3 +9,7 @@ type tagClear struct {
 	Title, FileName string
 	ArticlePaths []string
 }
+
+func (t *Tag)Index() string {
+	return t.FileName
+}
