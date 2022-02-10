@@ -35,6 +35,24 @@ func main()  {
 		}
 		return ctx.Send(data)
 	})
+	api := app.Group("/api", func(c *fiber.Ctx) error {
+		c.Set("Content-type", "application/json; charset=utf-8")
+		return c.Next()
+	})
+	api.Get("/articles", func(ctx *fiber.Ctx) error {
+		body, err := json.Marshal(contentService.GetArticles())
+		if err != nil {
+			return ctx.SendStatus(500)
+		}
+		return ctx.Send(body)
+	})
+	api.Get("/tags", func(ctx *fiber.Ctx) error {
+		body, err := json.Marshal(contentService.GetTags())
+		if err != nil {
+			return ctx.SendStatus(500)
+		}
+		return ctx.Send(body)
+	})
 	err = app.Listen(":90")
 	if err != nil {
 		panic(err)

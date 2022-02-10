@@ -18,7 +18,7 @@ func NewBase() *Base {
 }
 
 func (b *Base)AddTag(tag tagClear) {
-	newTag := Tag{Title: tag.Title, FileName: tag.FileName, Articles: make([]*Article, 0)}
+	newTag := Tag{Title: tag.Title, FileName: tag.FileName, TempId: len(b.tags)+1,Articles: make([]*Article, 0)}
 	for _, articlePath := range tag.ArticlePaths {
 		article, ok := b.articles[articlePath]
 		if ok {
