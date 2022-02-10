@@ -13,7 +13,7 @@ var (
 	connPathSubstring = "(../"
 )
 
-func (b *base) ParseFromDisk(pathToRoot string) error {
+func (b *Base) ParseFromDisk(pathToRoot string) error {
 	absPath, err := filepath.Abs(pathToRoot)
 	if err != nil {
 		return err

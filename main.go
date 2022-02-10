@@ -1,11 +1,9 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"github.com/joho/godotenv"
-	"github.com/krls256/knowlage-base-editor/pkg/github"
-	"github.com/krls256/knowlage-base-editor/pkg/zettelkasten"
+	"github.com/krls256/knowlage-base-editor/pkg/services/content"
 	"log"
 	"os"
 )
@@ -23,15 +21,9 @@ func init()  {
 }
 
 func main()  {
-	ctx := context.Background()
-	user := &github.User{Login: ghLogin, AuthToken: ghToken}
-	repo := &github.Repository{Name: ghRepo}
-	err := github.WriteRepoToDisk(ctx, user, repo, "storage/repo")
+	contentService, err := content.New(content.Config{GitHubLogin: ghLogin, GitHubAuthToken: ghToken, GitHubRepoName: ghRepo, PathToStoreRepo: "storage/repo"})
 	if err != nil {
-		panic("can not get repo")
+		panic(err)
 	}
-	base := zettelkasten.NewBase()
-	base.ParseFromDisk("storage/repo")
-	tag := base.Tags()[0]
-	fmt.Println(tag)
+	fmt.Println(contentService.GetArticles())
 }

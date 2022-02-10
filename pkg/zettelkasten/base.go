@@ -5,19 +5,19 @@ import (
 	"strings"
 )
 
-type base struct {
+type Base struct {
 	articles map[string]*Article
 	tags map[string]*Tag
 }
 
-func NewBase() *base {
-	return &base{
+func NewBase() *Base {
+	return &Base{
 		tags: make(map[string]*Tag),
 		articles: make(map[string]*Article),
 	}
 }
 
-func (b *base)AddTag(tag tagClear) {
+func (b *Base)AddTag(tag tagClear) {
 	newTag := Tag{Title: tag.Title, FileName: tag.FileName, Articles: make([]*Article, 0)}
 	for _, articlePath := range tag.ArticlePaths {
 		article, ok := b.articles[articlePath]
@@ -29,7 +29,7 @@ func (b *base)AddTag(tag tagClear) {
 	b.tags[newTag.Index()] = &newTag
 }
 
-func (b *base)AddArticle(article articleClear) {
+func (b *Base)AddArticle(article articleClear) {
 	fName := article.FileName
 	num := 0
 	numberStr := strings.Split(fName, "-")
@@ -58,7 +58,7 @@ func (b *base)AddArticle(article articleClear) {
 	b.articles[newArticle.Index()] = &newArticle
 }
 
-func (b *base)Tags() []*Tag {
+func (b *Base)Tags() []*Tag {
 	tags := make([]*Tag, len(b.tags))
 	i := 0
 	for _, tag := range b.tags {
@@ -68,7 +68,7 @@ func (b *base)Tags() []*Tag {
 	return tags
 }
 
-func (b *base)Articles() []*Article {
+func (b *Base)Articles() []*Article {
 	articles := make([]*Article, len(b.articles))
 	i := 0
 	for _, article := range b.articles {
