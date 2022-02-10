@@ -1,7 +1,8 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
+	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
 	"github.com/krls256/knowlage-base-editor/pkg/services/content"
 	"log"
@@ -25,5 +26,17 @@ func main()  {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(contentService.GetArticles())
+	app := fiber.New()
+	app.Get("/", func(ctx *fiber.Ctx) error {
+		data, err := json.Marshal(contentService.GetArticles())
+		if err != nil {
+			ctx.SendString(err.Error())
+			return ctx.SendStatus(500)
+		}
+		return ctx.Send(data)
+	})
+	err = app.Listen(":90")
+	if err != nil {
+		panic(err)
+	}
 }

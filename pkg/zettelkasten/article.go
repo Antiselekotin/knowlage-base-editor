@@ -3,8 +3,8 @@ package zettelkasten
 type Article struct {
 	Title, FileName, Content string
 	Number int
-	Tags []*Tag
-	Connections []*Article
+	Tags []*Tag `json:"-"`
+	Connections []*Article `json:"-"`
 }
 
 type articleClear struct {
