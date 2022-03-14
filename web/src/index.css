@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  font-size: 16px;
+}
+
+:root {
+  --background-soft: rgb(245, 245, 247);
+  --background-dark: rgb(66, 66, 69);
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  font-family: "SF Pro Text", sans-serif
+}
+
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("./fonts/SFProText-Regular.ttf") format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("./fonts/SFProText-Bold.ttf") format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

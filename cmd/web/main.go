@@ -27,14 +27,7 @@ func main()  {
 		panic(err)
 	}
 	app := fiber.New()
-	app.Get("/", func(ctx *fiber.Ctx) error {
-		data, err := json.Marshal(contentService.GetArticles())
-		if err != nil {
-			ctx.SendString(err.Error())
-			return ctx.SendStatus(500)
-		}
-		return ctx.Send(data)
-	})
+	app.Static("/", "./web/build/")
 	api := app.Group("/api", func(c *fiber.Ctx) error {
 		c.Set("Content-type", "application/json; charset=utf-8")
 		return c.Next()
