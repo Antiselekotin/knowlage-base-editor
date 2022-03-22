@@ -4,8 +4,10 @@ body {
 }
 
 :root {
-  --background-soft: rgb(245, 245, 247);
-  --background-dark: rgb(66, 66, 69);
+  --soft: rgb(245, 245, 247);
+  --gray: rgb(110, 110, 115);
+  --dark: rgb(66, 66, 69);
+  --black: rgb(29, 29, 31)
 }
 
 *, *:before, *:after {
